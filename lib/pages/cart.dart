@@ -14,7 +14,7 @@ class CartPage extends StatelessWidget {
       leading: IconButton(
         icon: Icon(Icons.chevron_left),
         onPressed: (){
-          Navigator.pop(context);
+          //Navigator.of(context).pop();
         },
       ),
       title: Text("My Chart"),
