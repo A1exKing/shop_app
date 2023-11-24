@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:testapp/pages/categor_produc_page.dart';
 
 class ModelListclass {
   final String title;
@@ -35,13 +36,18 @@ class ListModels extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ClipOval(
-                child: Container(
-                  padding: EdgeInsets.all(8),
-                  width: 60,
-                  height: 60,
-                  color: Color(0xfff6f6f6),
-                  child: Image.asset(listModel[index].image)
+              GestureDetector(
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>CategoryProductsPage(listModel[index].title)));
+                },
+                child: ClipOval(
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    width: 60,
+                    height: 60,
+                    color: Color(0xfff6f6f6),
+                    child: Image.asset(listModel[index].image)
+                  ),
                 ),
               ),
               

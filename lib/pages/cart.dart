@@ -14,7 +14,7 @@ class CartPage extends StatelessWidget {
       leading: IconButton(
         icon: Icon(Icons.chevron_left),
         onPressed: (){
-          //Navigator.of(context).pop();
+          //  Navigator.of(context).pop();
         },
       ),
       title: Text("My Chart"),
@@ -41,96 +41,101 @@ class CartPage extends StatelessWidget {
               // SizedBox(height: 12,),
               // ItemProductCart(),
             //  / Spacer(),
-               Container(
-                padding: EdgeInsets.only(left: 24, right: 24, top: 26, bottom: 18),
-                width: double.infinity,
-                height: MediaQuery.of(context).size.height * 0.38,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  boxShadow: [BoxShadow(color: Color(0xffE6E6E6 ), offset: Offset(0, -2), blurRadius: 12, spreadRadius: 5)],
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(36))
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 12,vertical: 8),
-                      width: double.infinity,
-                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(18),
-                        border: Border.all(color: Color(0xfff6f6f6)),
-                        color: Color(0xfff6f6f6).withOpacity(0.7)
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("Promo Code or Voucher", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),),
-                          Text("Savings with Your Promo Code or Voucher", style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: Colors.grey),),
-                        ],
-                      ),
+               Consumer(
+                builder: (context, ref, child) {
+                  final cartNotifier = ref.read(cartProvider.notifier);
+                   return Container(
+                    padding: EdgeInsets.only(left: 24, right: 24, top: 26, bottom: 18),
+                    width: double.infinity,
+                    height: MediaQuery.of(context).size.height * 0.38,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [BoxShadow(color: Color(0xffE6E6E6 ), offset: Offset(0, -2), blurRadius: 12, spreadRadius: 5)],
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(36))
                     ),
-                    SizedBox(height: 24,),
-                    Row(
+                    child: Column(
                       children: [
-                        Text("Sub Total", style: TextStyle(fontSize: 18),),
-                        Spacer(),
-                         RichText(
-                            text: TextSpan(
-                              text: '\$', style: TextStyle(color: Colors.red, fontSize: 18, fontWeight: FontWeight.bold),
-                              children: [
-                                TextSpan(text: "109.95", style: TextStyle(color: Colors.black))
-                              ]
-                            ),
-                          )
-                      ],
-                    ),
-                     SizedBox(height: 12,),
-                      Row(
-                      children: [
-                        Text("Shpping", style: TextStyle(fontSize: 18),),
-                        Spacer(),
-                         RichText(
-                            text: TextSpan(
-                              text: '\$', style: TextStyle(color: Colors.red, fontSize: 18, fontWeight: FontWeight.bold),
-                              children: [
-                                TextSpan(text: "10.25", style: TextStyle(color: Colors.black))
-                              ]
-                            ),
-                          )
-                      ],
-                    ),
-                    Spacer(),
-                    Row(
-                      children: [
-                        Text("Total", style: TextStyle(fontSize: 18),),
-                        Spacer(),
-                         RichText(
-                            text: TextSpan(
-                              text: '\$', style: TextStyle(color: Colors.red, fontSize: 18, fontWeight: FontWeight.bold),
-                              children: [
-                                TextSpan(text: "130.25", style: TextStyle(color: Colors.black))
-                              ]
-                            ),
-                          )
-                      ],
-                    ),
-                    SizedBox(height: 24,),
-                    SizedBox(
-                      height: 54,
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll<Color>(Color(0xff111111)),
-                          shape: MaterialStatePropertyAll<RoundedRectangleBorder>( RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0), // Задайте бажаний радіус тут
-                  ),)
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 12,vertical: 8),
+                          width: double.infinity,
+                           decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(18),
+                            border: Border.all(color: Color(0xfff6f6f6)),
+                            color: Color(0xfff6f6f6).withOpacity(0.7)
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Promo Code or Voucher", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16),),
+                              Text("Savings with Your Promo Code or Voucher", style: TextStyle(fontSize: 14, fontWeight: FontWeight.normal, color: Colors.grey),),
+                            ],
+                          ),
                         ),
-                        
-                        onPressed: (){}, child: Text("Checout", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),)
-                      ),
+                        SizedBox(height: 24,),
+                        Row(
+                          children: [
+                            Text("Sub Total", style: TextStyle(fontSize: 18),),
+                            Spacer(),
+                             RichText(
+                                text: TextSpan(
+                                  text: '\$', style: TextStyle(color: Colors.red, fontSize: 18, fontWeight: FontWeight.bold),
+                                  children: [
+                                    TextSpan(text:  cartNotifier.totalAmount.toString(), style: TextStyle(color: Colors.black))
+                                  ]
+                                ),
+                              )
+                          ],
+                        ),
+                         SizedBox(height: 12,),
+                          Row(
+                          children: [
+                            Text("Shpping", style: TextStyle(fontSize: 18),),
+                            Spacer(),
+                             RichText(
+                                text: TextSpan(
+                                  text: '\$', style: TextStyle(color: Colors.red, fontSize: 18, fontWeight: FontWeight.bold),
+                                  children: [
+                                    TextSpan(text: "10.25", style: TextStyle(color: Colors.black))
+                                  ]
+                                ),
+                              )
+                          ],
+                        ),
+                        Spacer(),
+                        Row(
+                          children: [
+                            Text("Total", style: TextStyle(fontSize: 18),),
+                            Spacer(),
+                             RichText(
+                                text: TextSpan(
+                                  text: '\$', style: TextStyle(color: Colors.red, fontSize: 18, fontWeight: FontWeight.bold),
+                                  children: [
+                                    TextSpan(text: cartNotifier.totalAmount.toString(), style: TextStyle(color: Colors.black))
+                                  ]
+                                ),
+                              )
+                          ],
+                        ),
+                        SizedBox(height: 24,),
+                        SizedBox(
+                          height: 54,
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStatePropertyAll<Color>(Color(0xff111111)),
+                              shape: MaterialStatePropertyAll<RoundedRectangleBorder>( RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12.0), // Задайте бажаний радіус тут
+                      ),)
+                            ),
+                            
+                            onPressed: (){}, child: Text("Checout", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w500),)
+                          ),
+                        )
+                      ],
                     )
-                  ],
-                )
-              ),
+              );
+                 }
+               ),
               
             ],
           );
@@ -166,13 +171,14 @@ final CartItem  item;
                     Container(
                       width: 120,
                       height: 120,
+                      clipBehavior: Clip.hardEdge,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(22),
                         border: Border.all(color: Color(0xfff6f6f6)),
                         color: Color(0xffe6e6e6)
                       ),
                       child: Center(
-                        child: Image.asset('assets/images/alphafly_2.png'),
+                        child: Image.network(item.image),
                       ),
                     ),
                     SizedBox(width: 12,),
