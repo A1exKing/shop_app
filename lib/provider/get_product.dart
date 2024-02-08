@@ -2,10 +2,23 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:testapp/models/product.dart';
+import 'package:testapp/provider/favorite_provider.dart';
 
 final productsProvider = FutureProvider<List<Product>>((ref) async {
   final response = await http.get(Uri.parse('http://192.168.0.108:3000/products'));
+ ref.watch(favoriteRestaurantsProvider.notifier).setInitialFavorites(1);
+  if (response.statusCode == 200) {
+    final List<dynamic> data = json.decode(response.body);
+    return data.map((json) => Product.fromJson(json)).toList();
+  } else {
+    throw Exception('Failed to load products');
+  }
+});
 
+
+final todaySaleProvider = FutureProvider<List<Product>>((ref) async {
+  final response = await http.get(Uri.parse('http://192.168.0.108:3000/today_sale'));
+ ref.watch(favoriteRestaurantsProvider.notifier).setInitialFavorites(1);
   if (response.statusCode == 200) {
     final List<dynamic> data = json.decode(response.body);
     return data.map((json) => Product.fromJson(json)).toList();

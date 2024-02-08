@@ -5,7 +5,7 @@ class Product {
   final String id;
   final String name;
   final String description;
-  final num price;
+  final dynamic price;
   final List<int>sizes;
   final List<Color>colors;
   late bool isFavorite ;
@@ -19,6 +19,20 @@ class Product {
     required this.image,
      this.isFavorite = false,
   });
+
+
+ factory Product.fromMap(Map<String, dynamic> map) {
+    return Product(
+      id: map['product_id'].toString(),
+      name: map['product_name'] as String,
+      description: map['description'] as String,
+      price: num.parse(map['price']),
+       sizes: List<int>.from(map['size']),
+       image:List<String>.from(map['image']),
+        colors: (map['colors'] as List).map((color) => Color(int.parse(color))).toList(), 
+    );
+  }
+
 
    factory Product.fromJson(Map<String, dynamic> json) {
     return Product(

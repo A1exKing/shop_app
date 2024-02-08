@@ -8,8 +8,9 @@ class TodaySale extends ConsumerWidget {
 
   @override
    Widget build(BuildContext context, WidgetRef ref) {
-    final productsAsyncValue = ref.watch(productsProvider);
-    print(productsAsyncValue.value?.first.name);
+    final productsAsyncValue = ref.watch(todaySaleProvider);
+    // final favoriteProduct = ref.watch(favoriteRestaurantsProvider);
+    //print(productsAsyncValue.value?.first.name);
     return productsAsyncValue.when(
       data: (data) {
         return Column(
@@ -39,7 +40,12 @@ class TodaySale extends ConsumerWidget {
             separatorBuilder: (context, index) => SizedBox(width: 12,),
             itemBuilder: (context, index) => GestureDetector(
               onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>DetailProduct(product : data[index])));
+                Navigator.of(context).push(
+                  
+                  MaterialPageRoute(
+                   settings: RouteSettings(),
+                    builder: (context)=>DetailProduct(product : data[index], tag : "sale"))
+                );
               },
               child: Container(
                  width: 160,
@@ -48,8 +54,8 @@ class TodaySale extends ConsumerWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                    Hero(
-                        transitionOnUserGestures: true,
-                      tag: data[index].image[0],
+                      transitionOnUserGestures: true,
+                      tag: "sale${data[index].image[0]}",
                       child: Container(
                         clipBehavior: Clip.hardEdge,
                         width: 160,

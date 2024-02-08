@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:testapp/pages/favorite_page.dart';
+import 'package:testapp/pages/history_orders.dart';
 import 'package:testapp/pages/home_page.dart';
 import 'package:testapp/widgets/bottom_nav_bar.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Test App',
+      title: 'Shop App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
@@ -28,9 +29,10 @@ class MyApp extends StatelessWidget {
          // onPageChanged: _onPageChanged,
           children: <Widget>[
             HomePage(),
-            Scaffold(body: Center(child: Text("2"))),
+            HistoryOrders(),
             FavoritePage(),
             Scaffold(body: Center(child: Text("4"))),
+             Scaffold(body: Center(child: Text("5"))),
           ],
         ),
       )
